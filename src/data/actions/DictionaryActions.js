@@ -6,7 +6,7 @@ export const addDictionaryItem = (word) => {
             const request = await fetch(`${BASE_URL}`, {
                 method: 'POST',
                 body: JSON.stringify({
-                    "word": word
+                    "word": word.toLowerCase()
                 }),
                 headers: {
                     "Content-Type":"application/json"
@@ -25,8 +25,8 @@ export const addDictionaryItem = (word) => {
                     });
                 }
             } else {
-                const response = await request.text();
-                throw new Error(response);
+                const response = await request.json();
+                throw new Error(response.message);
             }
         } catch (error) {
             throw new Error(error.message);
