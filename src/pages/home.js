@@ -110,8 +110,10 @@ const Home = (props) => {
 
     return (
         <>
+            {/* Header File */}
             <Header onChange={handleSearch} value={searchValue} />
 
+            {/* Main container for showing list of words */}
             <div className={classes.mainContainer}>
                 {isListLoading &&
                     <CircularProgress style={{
@@ -119,7 +121,6 @@ const Home = (props) => {
                     }} />}
 
                 <Grid container justify="center">
-
                     <Grid item md={6} sm={12} xs={12}>
                         {!isListLoading && DATA.dictionary.length === 0 && <Typography varient="body" component="p" color="secondary" align="center">
                             No word found in dictionary !
@@ -132,11 +133,18 @@ const Home = (props) => {
                 </Grid>
             </div>
 
+            {/* Floating Add Button */}
             <Fab className={classes.addButton} color="primary" aria-label="add" onClick={() => setAddFormOpen(true)}>
                 <AddIcon />
             </Fab>
+
+            {/* Add word form dialog */}
             {addFormOpen && <AddWordDialog isOpen={addFormOpen} isSubmiting={isFormSubmiting} handleClose={handleAddFormClose} handleSubmit={handleAddFormSubmit} />}
+
+            {/* Display Word detail dialog */}
             {wordDisplayOpen && <WordDisplayDialog open={wordDisplayOpen} handleClose={handleWordDisplayClose} selectedWord={selectedWord} />}
+
+            {/* Toast for showing different messages */}
             {isToastOpen && <Toaster message={toastMessage} onClose={handleToastClose} open={isToastOpen} severity={severity} />}
         </>
     )
