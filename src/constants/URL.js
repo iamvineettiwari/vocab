@@ -1,0 +1,1 @@
+export const BASE_URL = 'https://vocabbackend.herokuapp.com/api/v1/';

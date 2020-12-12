@@ -1,17 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { ThemeProvider } from '@material-ui/core/styles';
+import Theme from './constants/Theme';
+import Home from './pages/home';
+import { Provider } from 'react-redux';
+import { applyMiddleware, combineReducers, createStore } from 'redux';
+import { DictionaryReducer } from './data/reducers/Dictionary';
+import thunk from 'redux-thunk';
 import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+
+const reducers = combineReducers({
+  dictionary: DictionaryReducer
+});
+
+const store = createStore(reducers, applyMiddleware(thunk));
+
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+    <Provider store={store}>
+      <ThemeProvider theme={Theme}>
+        <Home />
+      </ThemeProvider>
+    </Provider>,
   document.getElementById('root')
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
